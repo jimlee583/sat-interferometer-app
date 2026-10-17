@@ -1,7 +1,7 @@
 [project]
 name = "sat-interferometer-app"
-version = "0.1.0"
-description = "Interactive narrowband satellite RF interferometer lab (versions 1 and 2)"
+version = "0.3.0"
+description = "Interactive satellite RF interferometer and LEO emitter geolocation lab"
 requires-python = ">=3.11"
 dependencies = [
     "streamlit>=1.40,<2",
@@ -9,7 +9,11 @@ dependencies = [
     "numpy>=1.26,<3",
     "pandas>=2.2,<3",
     "scipy>=1.13,<2",
+    "pyproj>=3.6,<4",
 ]
 
 [dependency-groups]
 dev = ["pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

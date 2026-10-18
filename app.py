@@ -467,7 +467,9 @@ with t3:
     candidates=candidate_solutions(xx,yy,valid,score,max_candidates=12,
                                    separation=max(.035,2*np.sin(np.deg2rad(resolution))))
     fig=go.Figure(go.Heatmap(x=xx[0],y=yy[:,0],z=score,colorscale='Viridis_r',
-                               colorbar=dict(title='Phase mismatch'),hovertemplate='uₓ=%{x:.3f}<br>uᵧ=%{y:.3f}<br>cost=%{z:.4f}<extra></extra>'))
+        colorbar=dict(title=dict(text='Phase mismatch', side='right'), thickness=14, len=0.75, y=0.46,
+                       ticklabelposition='inside', xpad=6),
+        hovertemplate='uₓ=%{x:.3f}<br>uᵧ=%{y:.3f}<br>cost=%{z:.4f}<extra></extra>'))
     ring=np.linspace(0,2*np.pi,400)
     fig.add_trace(go.Scatter(x=np.cos(ring),y=np.sin(ring),mode='lines',line=dict(color='white',width=2),showlegend=False))
     true_u=direction(az,off)
@@ -477,7 +479,9 @@ with t3:
             marker=dict(size=9,color='white',line=dict(color='black',width=1)),
             text=[str(i+1) for i in range(len(candidates))],textposition='top center',name='Grid minima'))
     fig.update_layout(title='Direction-cosine ambiguity map (uₓ, uᵧ)',xaxis_title='uₓ = sin θ cos az',
-        yaxis_title='uᵧ = sin θ sin az',height=570)
+        yaxis_title='uᵧ = sin θ sin az',height=570,
+        margin=dict(t=78, r=108, l=64, b=48),
+        legend=dict(orientation='h', yanchor='bottom', y=1.02, x=0, xanchor='left'))
     fig.update_yaxes(scaleanchor='x',scaleratio=1)
     st.plotly_chart(fig,use_container_width=True)
     if candidates:
